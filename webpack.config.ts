@@ -5,6 +5,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerWebpackPlugin from 'css-minimizer-webpack-plugin';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
@@ -52,6 +53,34 @@ const optimization = () => {
     return config;
 };
 
+const plugins = () => {
+    const base = [
+        new HTMLWebpackPlugin({
+            template: './index.html',
+            minify: {
+                collapseWhitespace: isProd,
+            },
+        }),
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: Path.resolve(__dirname, 'app/static'),
+                    to: Path.resolve(__dirname, 'dist/static'),
+                },
+            ],
+        }),
+        new MiniCssExtractPlugin({
+            filename: filename('css'),
+        }),
+    ];
+
+    if (isProd) {
+        base.push(new BundleAnalyzerPlugin());
+    }
+    return base;
+};
+
 module.exports = {
     context: Path.resolve(__dirname, 'app'),
     mode: 'development',
@@ -72,26 +101,7 @@ module.exports = {
         },
     },
     optimization: optimization(),
-    plugins: [
-        new HTMLWebpackPlugin({
-            template: './index.html',
-            minify: {
-                collapseWhitespace: isProd,
-            },
-        }),
-        new CleanWebpackPlugin(),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: Path.resolve(__dirname, 'app/static'),
-                    to: Path.resolve(__dirname, 'dist/static'),
-                },
-            ],
-        }),
-        new MiniCssExtractPlugin({
-            filename: filename('css'),
-        }),
-    ],
+    plugins: plugins(),
     module: {
         rules: [
             {

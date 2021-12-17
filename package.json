@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --mode development",
     "build:dev": "cross-env NODE_ENV=development webpack --mode development",
-    "build:prod": "cross-env NODE_ENV=production webpack --mode production"
+    "build:prod": "cross-env NODE_ENV=production webpack --mode production",
+    "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "browserslist": "> 0.25%, not dead",
   "keywords": [],
@@ -46,6 +47,7 @@
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "webpack": "^5.65.0",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0",
     "xml-loader": "^1.2.1"
@@ -53,6 +55,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "core-js": "^3.20.0",
+    "lodash": "^4.17.21",
     "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1"
   }
