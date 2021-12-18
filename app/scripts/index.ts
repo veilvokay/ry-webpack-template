@@ -1,4 +1,8 @@
-import 'styles/base.sass';
+import 'styles/base';
 
-console.log('true');
+import HomePage from './homePage';
+
+const homePage = new HomePage();
+
+homePage.sayHi('Nick');
 
