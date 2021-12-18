@@ -21,19 +21,19 @@ const filename = (ext) => {
     }
 };
 
-const babelOptions = (preset) => {
-    const options = {
-        presets: [
-            '@babel/preset-env',
-        ],
-    };
+// const babelOptions = (preset) => {
+//     const options = {
+//         presets: [
+//             '@babel/preset-env',
+//         ],
+//     };
 
-    if (preset) {
-        options.presets.push(preset);
-    }
+//     if (preset) {
+//         options.presets.push(preset);
+//     }
 
-    return options;
-};
+//     return options;
+// };
 
 const optimization = () => {
     const config = {
@@ -67,6 +67,7 @@ const plugins = () => {
                 {
                     from: Path.resolve(__dirname, 'app/static'),
                     to: Path.resolve(__dirname, 'dist/static'),
+                    noErrorOnMissing: true,
                 },
             ],
         }),
@@ -86,7 +87,7 @@ module.exports = {
     mode: 'development',
     entry: {
         main: './scripts/index.ts',
-        analytics: './scripts/Analytics.ts',
+        // newEntryPoint: './scripts/newEntryPoint.ts',
     },
     output: {
         filename: filename('js'),
