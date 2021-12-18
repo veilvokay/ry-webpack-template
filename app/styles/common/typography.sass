@@ -1,0 +1,73 @@
+@import './variables'
+
+@mixin typography($color, $font-family, $font-size, $font-weight, $letter-spacing:0, $line-height: normal)
+	color: $color
+	font-family: $font-family
+	font-size: $font-size
+	font-weight: $font-weight
+	letter-spacing: $letter-spacing
+	line-height: $line-height
+
+@mixin create-style($args...)
+	@include typography($args...) 
+
+// title h1
+@mixin title-h1
+	@include create-style(var(--color-white), var(--sub-font), var(--font-size-h1), var(--font-weight-7), var(--letter-spacing-h1), var(--line-height-h1))
+
+// title h2
+@mixin title-h2
+	@include create-style(var(--color-white), var(--sub-font), var(--font-size-h2), var(--font-weight-7), var(--letter-spacing-h2), var(--line-height-h2))
+
+// title h3
+@mixin title-h3
+	@include create-style(var(--color-white), var(--sub-font), var(--font-size-h3), var(--font-weight-4), var(--letter-spacing-h3), var(--line-height-h3))
+
+@mixin desc-1
+	@include create-style(var(--color-silver-chalice), var(--main-font), var(--font-size-desc1), var(--font-weight-4), var(--letter-spacing-desc1), var(--line-height-desc1))
+
+@mixin desc-2
+	@include create-style(var(--color-silver-chalice), var(--main-font), var(--font-size-desc2), var(--font-weight-4), var(--letter-spacing-desc2), var(--line-height-desc2))
+
+
+html, body, div, span, button,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, small, strong, ul, li, form, label,
+article, footer, header, nav, section
+    &.center-text
+        text-align: center
+
+    &.left-text
+        text-align: left
+
+    &.right-text
+        text-align: right
+
+    &.cap-text
+        text-transform: capitalize
+
+    &.up-text
+        text-transform: uppercase
+
+    &.low-text
+        text-transform: lowercase
+
+    &.title
+        @include title-h1
+
+    &.title-h2
+        @include title-h2
+
+    &.title-h3
+        @include title-h3
+
+    &.desc-1
+        @include desc-1
+
+    &.desc-2
+        @include desc-2
+
+    &::selection
+        color: var(--color-imperial-red)
+        background: none
+        text-shadow: none
